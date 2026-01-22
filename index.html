@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <title>ლაშას ვალენტინობის ქაოსი 💘</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #ffe6f0;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      text-align: center;
+      user-select: none;
+    }
+
+    h1 {
+      margin-top: 20px;
+    }
+
+    #message {
+      font-size: 16px;
+      margin-bottom: 10px;
+      color: #b30059;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 48px;
+      cursor: pointer;
+      transition: 0.05s;
+    }
+
+    .shake {
+      animation: shake 0.2s;
+    }
+
+    @keyframes shake {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(5px, -5px); }
+      50% { transform: translate(-5px, 5px); }
+      75% { transform: translate(5px, 5px); }
+      100% { transform: translate(0, 0); }
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>იპოვე ნამდვილი გული 💘</h1>
+<div id="message">თუ მართლა გიყვარვარ… სცადე 😌</div>
+
+<script>
+  const messages = [
+    "აუ არა 😏",
+    "ეს არაა… მაგრამ შენ მაინც ჩემი ხარ 💔",
+    "კონცენტრაცია ლაშა 😌",
+    "მიყვარხარ, მაგრამ არა ეს 😭",
+    "ეს რა იყო ახლა 👀",
+    "კიდევ სცადე 😈💘"
+  ];
+
+  let size = 48;
+  const heartCount = 4;
+  const hearts = [];
+
+  function randomPos(el) {
+    const x = Math.random() * (window.innerWidth - 60);
+    const y = Math.random() * (window.innerHeight - 120);
+    el.style.left = x + "px";
+    el.style.top = y + "px";
+  }
+
+  function chaos() {
+    size = Math.max(22, size - 2);
+    hearts.forEach(h => {
+      h.style.fontSize = size + "px";
+      randomPos(h);
+    });
+
+    document.getElementById("message").innerText =
+      messages[Math.floor(Math.random() * messages.length)];
+
+    document.body.classList.add("shake");
+    setTimeout(() => document.body.classList.remove("shake"), 150);
+  }
+
+  for (let i = 0; i < heartCount; i++) {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerText = i === 0 ? "💗" : "💔";
+    document.body.appendChild(h);
+    randomPos(h);
+
+    if (i !== 0) {
+      h.addEventListener("touchstart", chaos);
+      h.addEventListener("click", chaos);
+    }
+
+    if (i === 0) {
+      h.addEventListener("touchstart", chaos);
+      h.addEventListener("click", () => {
+        document.body.innerHTML = `
+          <h1>დადამმმმმმ 😳💘</h1>
+          <p>უკვე ოფიციალურად ჩემი ვალენტინი ხარ 💕</p>
+          <p>და კი… შენი ჯილდო ვარ მე 😌</p>
+        `;
+      });
+    }
+
+    hearts.push(h);
+  }
+</script>
+
+</body>
+</html>
